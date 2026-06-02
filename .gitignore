@@ -3,4 +3,10 @@ dist/
 .env
 .DS_Store
 npm-debug.log*
-
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+ml/models/*.joblib
+ml/reports/*.json
+ml/data/processed/*.csv

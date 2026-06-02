@@ -1,0 +1,18 @@
+date,tournament,home_team,away_team,home_score,away_score,neutral,country
+2018-06-14,World Cup,Russia,Saudi Arabia,5,0,false,Russia
+2018-06-17,World Cup,Germany,Mexico,0,1,true,Russia
+2018-06-19,World Cup,Colombia,Japan,1,2,true,Russia
+2018-07-10,World Cup,France,Belgium,1,0,true,Russia
+2018-07-15,World Cup,France,Croatia,4,2,true,Russia
+2022-11-20,World Cup,Qatar,Ecuador,0,2,false,Qatar
+2022-11-21,World Cup,England,Iran,6,2,true,Qatar
+2022-11-22,World Cup,Argentina,Saudi Arabia,1,2,true,Qatar
+2022-11-23,World Cup,France,Australia,4,1,true,Qatar
+2022-12-01,World Cup,Japan,Spain,2,1,true,Qatar
+2022-12-14,World Cup,France,Morocco,2,0,true,Qatar
+2022-12-18,World Cup,Argentina,France,3,3,true,Qatar
+2023-03-24,Friendly,Japan,Uruguay,1,1,false,Japan
+2023-06-16,Friendly,France,Gibraltar,3,0,true,France
+2023-09-09,Friendly,Germany,Japan,1,4,false,Germany
+2024-03-26,Friendly,France,Chile,3,2,false,France
+

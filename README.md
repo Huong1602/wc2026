@@ -1,26 +1,46 @@
 # WC 2026 Football Prediction Platform
 
-Fullstack project dự đoán kết quả các trận bóng đá World Cup 2026.
+Project dự đoán kết quả các trận bóng đá World Cup 2026 dựa trên dữ liệu lịch sử, ranking FIFA, phong độ gần đây, lịch sử đối đầu và mô hình Machine Learning.
 
-## Công nghệ
+## Mục tiêu
 
-- Frontend: React + Vite + TailwindCSS
-- Backend: Node.js + Express
-- Database: PostgreSQL
-- Runtime: Docker + Docker Compose
+- Thu thập và chuẩn hóa dữ liệu trận đấu quốc tế.
+- Tạo bộ đặc trưng đầu vào cho bài toán dự đoán bóng đá.
+- Huấn luyện và so sánh các mô hình:
+  - Logistic Regression
+  - Random Forest
+  - XGBoost
+- Dự đoán kết quả `home_win`, `draw`, `away_win`.
+- Dự đoán tỷ số baseline bằng regression.
+- Cung cấp prototype web để nhập hai đội tuyển và xem kết quả dự báo.
 
-## Chức năng
+## Cấu trúc project
 
-- Xem danh sách đội tuyển và ranking mẫu.
-- Xem dữ liệu trận đấu lịch sử mẫu.
-- Nhập hai đội tuyển để dự đoán:
-  - Xác suất đội 1 thắng
-  - Xác suất hòa
-  - Xác suất đội 2 thắng
-  - Tỷ số dự đoán baseline
-- Lưu lịch sử dự đoán vào PostgreSQL.
+```text
+WC2026 Prediction Platform/
+├── backend/              # Express API + PostgreSQL
+│   ├── db/init.sql       # Schema và seed data
+│   └── src/
+│       ├── controllers/
+│       ├── routes/
+│       └── services/
+├── frontend/             # React + Vite + TailwindCSS
+│   └── src/
+│       └── components/
+├── ml/                   # Machine Learning pipeline
+│   ├── data/raw/         # Dữ liệu mẫu
+│   ├── data/processed/   # Dataset sau xử lý
+│   ├── models/           # Model sau train
+│   ├── reports/          # Metrics đánh giá
+│   └── src/
+│       ├── data_processing.py
+│       ├── features.py
+│       ├── train.py
+│       └── predict.py
+└── docker-compose.yml
+```
 
-## Chạy project
+## Chạy fullstack demo
 
 ```powershell
 docker compose up --build
@@ -31,6 +51,24 @@ Sau khi chạy:
 - Frontend: http://localhost:5173
 - Backend: http://localhost:3000
 - PostgreSQL: localhost:5432
+
+## Chạy ML pipeline
+
+```powershell
+cd ml
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python -m src.train
+python -m src.predict --home "France" --away "Japan"
+```
+
+Kết quả train được lưu tại:
+
+- `ml/models/result_classifier.joblib`
+- `ml/models/score_regressor.joblib`
+- `ml/reports/training_metrics.json`
+- `ml/data/processed/training_dataset.csv`
 
 ## API chính
 
@@ -54,7 +92,12 @@ Body mẫu:
 }
 ```
 
-## Ghi chú
+## Đánh giá đúng yêu cầu
 
-Đây là baseline demo cho đề tài. Mô hình hiện tại dùng scoring heuristic dựa trên ranking, phong độ gần đây, đối đầu và lợi thế chủ nhà 2026. Khi làm bản nâng cao, có thể thay `backend/src/services/predictionService.js` bằng mô hình ML thật như Logistic Regression, Random Forest hoặc XGBoost.
+Project hiện có hai phần rõ ràng:
+
+- `ml/`: đúng trọng tâm đề tài Machine Learning, gồm dữ liệu mẫu, feature engineering, train model, predict CLI và báo cáo metrics.
+- `backend/` + `frontend/`: prototype/demo để người dùng nhập hai đội tuyển và xem dự đoán.
+
+Lưu ý: backend hiện dùng heuristic baseline để demo nhanh trên web. Phần model ML thật nằm trong `ml/`; bước nâng cấp tiếp theo là nạp model `.joblib` từ `ml/models/` vào backend hoặc tạo Python prediction service riêng.
 
