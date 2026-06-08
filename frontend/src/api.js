@@ -29,6 +29,10 @@ export function fetchPredictions() {
   return request("/predictions");
 }
 
+export function fetchModelMetrics() {
+  return request("/model/metrics");
+}
+
 export function createPrediction(data) {
   return request("/predictions", {
     method: "POST",

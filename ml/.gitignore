@@ -3,7 +3,4 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .streamlit/
-models/*.joblib
-reports/*.json
-data/processed/*.csv
-
+reports/latest_prediction.json

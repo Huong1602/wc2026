@@ -2,6 +2,17 @@ import pandas as pd
 
 from src.config import HOST_TEAMS_2026
 
+TOURNAMENT_IMPORTANCE = {
+    "Friendly": 1.0,
+    "FIFA World Cup qualification": 2.5,
+    "UEFA Euro qualification": 2.0,
+    "Copa América": 3.0,
+    "AFC Asian Cup": 3.0,
+    "African Cup of Nations": 3.0,
+    "CONCACAF Championship": 3.0,
+    "FIFA World Cup": 4.0,
+}
+
 
 def result_points(goals_for: int, goals_against: int) -> int:
     if goals_for > goals_against:
@@ -18,24 +29,36 @@ def get_recent_stats(matches: pd.DataFrame, team: str, match_date: pd.Timestamp,
     ].sort_values("date", ascending=False).head(window)
 
     if history.empty:
-        return {"recent_points": 1.0, "recent_goal_diff": 0.0, "recent_goals_for": 1.0}
+        return {
+            "recent_points": 1.0,
+            "recent_goal_diff": 0.0,
+            "recent_goals_for": 1.0,
+            "days_since_last_match": 120.0,
+            "world_cup_points": 1.0,
+        }
 
     points = []
     goal_diffs = []
     goals_for = []
+    world_cup_points = []
 
     for _, row in history.iterrows():
         is_home = row["home_team"] == team
         team_goals = int(row["home_score"] if is_home else row["away_score"])
         opponent_goals = int(row["away_score"] if is_home else row["home_score"])
-        points.append(result_points(team_goals, opponent_goals))
+        points_value = result_points(team_goals, opponent_goals)
+        points.append(points_value)
         goal_diffs.append(team_goals - opponent_goals)
         goals_for.append(team_goals)
+        if row["tournament"] == "FIFA World Cup":
+            world_cup_points.append(points_value)
 
     return {
         "recent_points": float(sum(points) / len(points)),
         "recent_goal_diff": float(sum(goal_diffs) / len(goal_diffs)),
         "recent_goals_for": float(sum(goals_for) / len(goals_for)),
+        "days_since_last_match": float((match_date - history.iloc[0]["date"]).days),
+        "world_cup_points": float(sum(world_cup_points) / len(world_cup_points)) if world_cup_points else 1.0,
     }
 
 
@@ -90,6 +113,7 @@ def make_match_features(
     rankings: pd.DataFrame,
     neutral: bool = True,
     country: str = "",
+    tournament: str = "",
 ) -> dict:
     home_recent = get_recent_stats(matches, home_team, match_date)
     away_recent = get_recent_stats(matches, away_team, match_date)
@@ -113,5 +137,15 @@ def make_match_features(
         "neutral": int(bool(neutral)),
         "home_is_2026_host": int(home_team in HOST_TEAMS_2026 and country in HOST_TEAMS_2026),
         "away_is_2026_host": int(away_team in HOST_TEAMS_2026 and country in HOST_TEAMS_2026),
+        "home_days_since_last_match": home_recent["days_since_last_match"],
+        "away_days_since_last_match": away_recent["days_since_last_match"],
+        "days_since_last_match_delta": home_recent["days_since_last_match"] - away_recent["days_since_last_match"],
+        "home_world_cup_points": home_recent["world_cup_points"],
+        "away_world_cup_points": away_recent["world_cup_points"],
+        "world_cup_points_diff": home_recent["world_cup_points"] - away_recent["world_cup_points"],
+        "tournament_importance": get_tournament_importance(tournament),
     }
 
+
+def get_tournament_importance(tournament: str) -> float:
+    return TOURNAMENT_IMPORTANCE.get(tournament, 1.5)

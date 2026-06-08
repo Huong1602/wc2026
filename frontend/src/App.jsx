@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { createPrediction, fetchMatches, fetchPredictions, fetchTeams } from "./api.js";
+import { createPrediction, fetchMatches, fetchModelMetrics, fetchPredictions, fetchTeams } from "./api.js";
 import MatchTable from "./components/MatchTable.jsx";
+import ModelEvaluation from "./components/ModelEvaluation.jsx";
 import PredictionForm from "./components/PredictionForm.jsx";
 import PredictionHistory from "./components/PredictionHistory.jsx";
 import PredictionResult from "./components/PredictionResult.jsx";
@@ -11,20 +12,23 @@ export default function App() {
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
   const [history, setHistory] = useState([]);
+  const [evaluation, setEvaluation] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function loadDashboardData() {
     try {
-      const [teamData, matchData, predictionData] = await Promise.all([
+      const [teamData, matchData, predictionData, evaluationData] = await Promise.all([
         fetchTeams(),
         fetchMatches(),
         fetchPredictions(),
+        fetchModelMetrics(),
       ]);
       setTeams(teamData);
       setMatches(matchData);
       setHistory(predictionData);
+      setEvaluation(evaluationData);
     } catch (requestError) {
       setError(requestError.message);
     }
@@ -60,8 +64,8 @@ export default function App() {
             Hệ thống dự đoán kết quả bóng đá
           </h1>
           <p className="mt-4 max-w-3xl text-slate-300">
-            Demo fullstack dùng dữ liệu lịch sử mẫu, ranking FIFA, phong độ gần đây,
-            lịch sử đối đầu và lợi thế đồng chủ nhà để dự báo xác suất thắng hòa thua.
+            Demo fullstack dùng dữ liệu trận quốc tế công khai, ranking Elo-derived,
+            phong độ gần đây, lịch sử đối đầu và lợi thế đồng chủ nhà để dự báo xác suất thắng hòa thua.
           </p>
         </div>
 
@@ -79,6 +83,10 @@ export default function App() {
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <TeamTable teams={teams} />
           <MatchTable matches={matches} />
+        </div>
+
+        <div className="mt-8">
+          <ModelEvaluation evaluation={evaluation} />
         </div>
 
         <div className="mt-8">

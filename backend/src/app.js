@@ -3,6 +3,7 @@ import express from "express";
 
 import healthRoutes from "./routes/healthRoutes.js";
 import matchRoutes from "./routes/matchRoutes.js";
+import modelRoutes from "./routes/modelRoutes.js";
 import predictionRoutes from "./routes/predictionRoutes.js";
 import teamRoutes from "./routes/teamRoutes.js";
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api/health", healthRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/matches", matchRoutes);
+app.use("/api/model", modelRoutes);
 app.use("/api/predictions", predictionRoutes);
 
 app.use((request, response) => {
@@ -28,4 +30,3 @@ app.use((request, response) => {
 });
 
 export default app;
-

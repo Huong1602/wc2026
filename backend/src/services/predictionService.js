@@ -1,7 +1,9 @@
+import { spawn } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+
 import { pool } from "../config/db.js";
 import { findTeamByName } from "./teamService.js";
-
-const HOST_TEAMS_2026 = new Set(["United States", "Canada", "Mexico"]);
 
 function createBadRequest(message) {
   const error = new Error(message);
@@ -16,134 +18,90 @@ function normalizeDate(value) {
 
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) {
-    throw createBadRequest("matchDate không hợp lệ.");
+    throw createBadRequest("matchDate is invalid.");
   }
 
   return value.slice(0, 10);
 }
 
-function resultPoints(goalsFor, goalsAgainst) {
-  if (goalsFor > goalsAgainst) return 3;
-  if (goalsFor === goalsAgainst) return 1;
-  return 0;
+function getProjectRoot() {
+  return path.resolve(process.cwd(), "..");
 }
 
-function average(values, fallback = 0) {
-  if (!values.length) {
-    return fallback;
+function getMlDirectory() {
+  return process.env.ML_DIR || path.join(getProjectRoot(), "ml");
+}
+
+function getPythonExecutable() {
+  if (process.env.PYTHON_EXECUTABLE) {
+    return process.env.PYTHON_EXECUTABLE;
   }
 
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
-}
-
-async function getLatestRank(teamId, matchDate) {
-  const result = await pool.query(
-    `
-      SELECT rank
-      FROM fifa_rankings
-      WHERE team_id = $1 AND ranking_date <= $2
-      ORDER BY ranking_date DESC
-      LIMIT 1
-    `,
-    [teamId, matchDate]
-  );
-
-  return Number(result.rows[0]?.rank || 50);
-}
-
-async function getRecentStats(teamId, matchDate) {
-  const result = await pool.query(
-    `
-      SELECT home_team_id, away_team_id, home_score, away_score
-      FROM matches
-      WHERE match_date < $1
-      AND (home_team_id = $2 OR away_team_id = $2)
-      ORDER BY match_date DESC
-      LIMIT 5
-    `,
-    [matchDate, teamId]
-  );
-
-  const points = [];
-  const goalDiffs = [];
-  const goalsFor = [];
-
-  for (const match of result.rows) {
-    const isHome = match.home_team_id === teamId;
-    const teamGoals = Number(isHome ? match.home_score : match.away_score);
-    const opponentGoals = Number(isHome ? match.away_score : match.home_score);
-
-    points.push(resultPoints(teamGoals, opponentGoals));
-    goalDiffs.push(teamGoals - opponentGoals);
-    goalsFor.push(teamGoals);
+  const mlDirectory = getMlDirectory();
+  const windowsVenvPython = path.join(mlDirectory, ".venv", "Scripts", "python.exe");
+  if (fs.existsSync(windowsVenvPython)) {
+    return windowsVenvPython;
   }
 
-  return {
-    points: average(points, 1),
-    goalDiff: average(goalDiffs, 0),
-    goalsFor: average(goalsFor, 1),
-  };
+  return process.platform === "win32" ? "python" : "python3";
 }
 
-async function getHeadToHeadPoints(homeTeamId, awayTeamId, matchDate) {
-  const result = await pool.query(
-    `
-      SELECT home_team_id, away_team_id, home_score, away_score
-      FROM matches
-      WHERE match_date < $1
-      AND (
-        (home_team_id = $2 AND away_team_id = $3)
-        OR (home_team_id = $3 AND away_team_id = $2)
-      )
-      ORDER BY match_date DESC
-      LIMIT 5
-    `,
-    [matchDate, homeTeamId, awayTeamId]
-  );
+function runPythonPrediction(payload) {
+  const mlDirectory = getMlDirectory();
+  const args = [
+    "-m",
+    "src.predict",
+    "--home",
+    payload.homeTeam,
+    "--away",
+    payload.awayTeam,
+    "--date",
+    payload.matchDate,
+    "--country",
+    payload.country,
+    "--tournament",
+    payload.tournament || "FIFA World Cup",
+  ];
 
-  const points = result.rows.map((match) => {
-    if (match.home_team_id === homeTeamId) {
-      return resultPoints(Number(match.home_score), Number(match.away_score));
-    }
+  if (payload.neutral === false) {
+    args.push("--not-neutral");
+  }
 
-    return resultPoints(Number(match.away_score), Number(match.home_score));
+  return new Promise((resolve, reject) => {
+    const child = spawn(getPythonExecutable(), args, {
+      cwd: mlDirectory,
+      shell: false,
+    });
+
+    let stdout = "";
+    let stderr = "";
+
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk.toString();
+    });
+
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString();
+    });
+
+    child.on("error", (error) => {
+      reject(error);
+    });
+
+    child.on("close", (code) => {
+      if (code !== 0) {
+        reject(new Error(stderr || `Python prediction failed with exit code ${code}`));
+        return;
+      }
+
+      try {
+        const lines = stdout.trim().split(/\r?\n/);
+        resolve(JSON.parse(lines[lines.length - 1]));
+      } catch (error) {
+        reject(new Error(`Could not parse ML prediction output: ${stdout}`));
+      }
+    });
   });
-
-  return average(points, 1);
-}
-
-function softmax(scores) {
-  const maxScore = Math.max(...scores);
-  const exponents = scores.map((score) => Math.exp(score - maxScore));
-  const total = exponents.reduce((sum, value) => sum + value, 0);
-  return exponents.map((value) => value / total);
-}
-
-function buildPredictionScores(features) {
-  const rankSignal = (features.awayRank - features.homeRank) / 25;
-  const formSignal = (features.homeRecent.points - features.awayRecent.points) / 3;
-  const goalDiffSignal = (features.homeRecent.goalDiff - features.awayRecent.goalDiff) / 4;
-  const h2hSignal = (features.headToHeadPoints - 1) / 3;
-  const hostSignal = features.homeHostAdvantage - features.awayHostAdvantage;
-
-  const advantage = rankSignal + formSignal + goalDiffSignal + h2hSignal + hostSignal;
-  const drawScore = 0.65 - Math.abs(advantage) * 0.35;
-
-  return {
-    home: advantage,
-    draw: drawScore,
-    away: -advantage,
-  };
-}
-
-function buildPredictedScore(probabilities, features) {
-  const homeAttack = features.homeRecent.goalsFor + probabilities.homeWin * 1.2 + features.homeHostAdvantage * 0.4;
-  const awayAttack = features.awayRecent.goalsFor + probabilities.awayWin * 1.2 + features.awayHostAdvantage * 0.4;
-
-  return {
-    homeScore: Math.max(0, Math.round(homeAttack)),
-    awayScore: Math.max(0, Math.round(awayAttack)),
-  };
 }
 
 export async function createMatchPrediction(payload) {
@@ -152,48 +110,31 @@ export async function createMatchPrediction(payload) {
   const matchDate = normalizeDate(payload.matchDate);
   const country = String(payload.country || "United States").trim();
   const neutral = payload.neutral !== false;
+  const tournament = String(payload.tournament || "FIFA World Cup").trim();
 
   if (!homeTeamName || !awayTeamName) {
-    throw createBadRequest("homeTeam và awayTeam là bắt buộc.");
+    throw createBadRequest("homeTeam and awayTeam are required.");
   }
 
   if (homeTeamName.toLowerCase() === awayTeamName.toLowerCase()) {
-    throw createBadRequest("Hai đội không được trùng nhau.");
+    throw createBadRequest("Two teams must be different.");
   }
 
   const homeTeam = await findTeamByName(homeTeamName);
   const awayTeam = await findTeamByName(awayTeamName);
 
   if (!homeTeam || !awayTeam) {
-    throw createBadRequest("Đội tuyển chưa có trong dữ liệu mẫu.");
+    throw createBadRequest("Team is not available in the demo database.");
   }
 
-  const [homeRank, awayRank, homeRecent, awayRecent, headToHeadPoints] = await Promise.all([
-    getLatestRank(homeTeam.id, matchDate),
-    getLatestRank(awayTeam.id, matchDate),
-    getRecentStats(homeTeam.id, matchDate),
-    getRecentStats(awayTeam.id, matchDate),
-    getHeadToHeadPoints(homeTeam.id, awayTeam.id, matchDate),
-  ]);
-
-  const features = {
-    homeRank,
-    awayRank,
-    homeRecent,
-    awayRecent,
-    headToHeadPoints,
-    homeHostAdvantage: HOST_TEAMS_2026.has(homeTeam.name) && country === homeTeam.name ? 0.2 : 0,
-    awayHostAdvantage: HOST_TEAMS_2026.has(awayTeam.name) && country === awayTeam.name ? 0.2 : 0,
-  };
-
-  const scores = buildPredictionScores(features);
-  const [homeWin, draw, awayWin] = softmax([scores.home, scores.draw, scores.away]);
-  const probabilities = {
-    homeWin,
-    draw,
-    awayWin,
-  };
-  const predictedScore = buildPredictedScore(probabilities, features);
+  const mlPrediction = await runPythonPrediction({
+    homeTeam: homeTeam.name,
+    awayTeam: awayTeam.name,
+    matchDate,
+    country,
+    neutral,
+    tournament,
+  });
 
   const insertResult = await pool.query(
     `
@@ -218,31 +159,17 @@ export async function createMatchPrediction(payload) {
       matchDate,
       country,
       neutral,
-      homeWin,
-      draw,
-      awayWin,
-      predictedScore.homeScore,
-      predictedScore.awayScore,
+      mlPrediction.probabilities.homeWin,
+      mlPrediction.probabilities.draw,
+      mlPrediction.probabilities.awayWin,
+      mlPrediction.predictedScore.home,
+      mlPrediction.predictedScore.away,
     ]
   );
 
   return {
     id: insertResult.rows[0].id,
-    homeTeam: homeTeam.name,
-    awayTeam: awayTeam.name,
-    matchDate,
-    country,
-    neutral,
-    probabilities,
-    predictedScore,
-    features: {
-      homeRank,
-      awayRank,
-      rankDiff: homeRank - awayRank,
-      homeRecent,
-      awayRecent,
-      headToHeadPoints,
-    },
+    ...mlPrediction,
     createdAt: insertResult.rows[0].createdAt,
   };
 }
@@ -274,4 +201,3 @@ export async function listPredictions(limit = 10) {
 
   return result.rows;
 }
-

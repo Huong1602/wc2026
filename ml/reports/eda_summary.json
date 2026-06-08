@@ -1,0 +1,85 @@
+{
+  "rows": 49363,
+  "date_min": "1872-11-30",
+  "date_max": "2026-06-06",
+  "teams": 336,
+  "result_distribution": {
+    "home_win": 0.49,
+    "away_win": 0.2826,
+    "draw": 0.2274
+  },
+  "average_total_goals": 2.939408058667423,
+  "home_advantage": {
+    "non_neutral_home_win_rate": 0.5073764174832104,
+    "neutral_home_win_rate": 0.4417159082188627
+  },
+  "top_tournaments": [
+    {
+      "tournament": "Friendly",
+      "matches": 18354,
+      "avg_goals": 2.875122589081399,
+      "draw_rate": 0.2513348588863463
+    },
+    {
+      "tournament": "FIFA World Cup qualification",
+      "matches": 8771,
+      "avg_goals": 2.8867859993159275,
+      "draw_rate": 0.2114924181963288
+    },
+    {
+      "tournament": "UEFA Euro qualification",
+      "matches": 2824,
+      "avg_goals": 2.831444759206799,
+      "draw_rate": 0.1958215297450425
+    },
+    {
+      "tournament": "African Cup of Nations qualification",
+      "matches": 2327,
+      "avg_goals": 2.4172754619681993,
+      "draw_rate": 0.24538031800601634
+    },
+    {
+      "tournament": "FIFA World Cup",
+      "matches": 964,
+      "avg_goals": 2.8215767634854774,
+      "draw_rate": 0.22199170124481327
+    },
+    {
+      "tournament": "Copa América",
+      "matches": 869,
+      "avg_goals": 3.136939010356732,
+      "draw_rate": 0.21634062140391255
+    },
+    {
+      "tournament": "African Cup of Nations",
+      "matches": 845,
+      "avg_goals": 2.3775147928994085,
+      "draw_rate": 0.2863905325443787
+    },
+    {
+      "tournament": "AFC Asian Cup qualification",
+      "matches": 829,
+      "avg_goals": 3.290711700844391,
+      "draw_rate": 0.1652593486127865
+    },
+    {
+      "tournament": "UEFA Nations League",
+      "matches": 658,
+      "avg_goals": 2.512158054711246,
+      "draw_rate": 0.2507598784194529
+    },
+    {
+      "tournament": "CECAFA Cup",
+      "matches": 620,
+      "avg_goals": 2.514516129032258,
+      "draw_rate": 0.23709677419354838
+    }
+  ],
+  "ranking_rows": 1276915,
+  "ranking_note": "rankings.csv is Elo-derived when official FIFA historical CSV is unavailable.",
+  "conclusions": [
+    "Draws are usually a minority class, so macro F1 is more informative than accuracy alone.",
+    "Non-neutral games generally show stronger home advantage than neutral games.",
+    "Ranking/strength features should be combined with recent form because team strength changes over time."
+  ]
+}

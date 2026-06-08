@@ -2,13 +2,17 @@ function formatPercent(value) {
   return `${(Number(value || 0) * 100).toFixed(1)}%`;
 }
 
+function getScore(predictedScore, key, legacyKey) {
+  return predictedScore?.[key] ?? predictedScore?.[legacyKey] ?? 0;
+}
+
 export default function PredictionResult({ prediction }) {
   if (!prediction) {
     return (
       <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl">
         <h2 className="text-xl font-semibold">Kết quả dự đoán</h2>
         <p className="mt-3 text-slate-400">
-          Chưa có dự đoán. Nhập trận đấu ở form bên trái để xem xác suất và tỷ số baseline.
+          Chưa có dự đoán. Nhập trận đấu ở form bên trái để xem xác suất, tỷ số và các feature quan trọng.
         </p>
       </div>
     );
@@ -22,7 +26,7 @@ export default function PredictionResult({ prediction }) {
         {prediction.homeTeam} vs {prediction.awayTeam}
       </h2>
       <p className="mt-1 text-sm text-slate-400">
-        Ngày {prediction.matchDate} tại {prediction.country}
+        Ngày {prediction.matchDate} tại {prediction.country} · Model: {prediction.modelName || "N/A"}
       </p>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
@@ -45,10 +49,23 @@ export default function PredictionResult({ prediction }) {
       <div className="mt-5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
         <p className="text-sm text-emerald-200">Tỷ số dự đoán</p>
         <p className="mt-1 text-3xl font-bold">
-          {prediction.homeTeam} {predictedScore.homeScore} - {predictedScore.awayScore}{" "}
-          {prediction.awayTeam}
+          {prediction.homeTeam} {getScore(predictedScore, "home", "homeScore")} -{" "}
+          {getScore(predictedScore, "away", "awayScore")} {prediction.awayTeam}
         </p>
       </div>
+
+      {prediction.topFeatures?.length > 0 && (
+        <div className="mt-5">
+          <p className="text-sm font-medium text-slate-300">Yếu tố ảnh hưởng mạnh</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {prediction.topFeatures.map((feature) => (
+              <span key={feature} className="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300">
+                {feature}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

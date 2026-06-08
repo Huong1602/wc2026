@@ -1,6 +1,6 @@
 # WC 2026 Football Prediction Platform
 
-Project dự đoán kết quả các trận bóng đá World Cup 2026 dựa trên dữ liệu lịch sử, ranking FIFA, phong độ gần đây, lịch sử đối đầu và mô hình Machine Learning.
+Dự án dự đoán kết quả các trận bóng đá World Cup 2026 dựa trên dữ liệu lịch sử, ranking đội tuyển, phong độ gần đây, lịch sử đối đầu và mô hình Machine Learning.
 
 ## Mục tiêu
 
@@ -11,7 +11,7 @@ Project dự đoán kết quả các trận bóng đá World Cup 2026 dựa trê
   - Random Forest
   - XGBoost
 - Dự đoán kết quả `home_win`, `draw`, `away_win`.
-- Dự đoán tỷ số baseline bằng regression.
+- Dự đoán tỷ số bằng regression baseline.
 - Cung cấp prototype web để nhập hai đội tuyển và xem kết quả dự báo.
 
 ## Cấu trúc project
@@ -28,11 +28,14 @@ WC2026 Prediction Platform/
 │   └── src/
 │       └── components/
 ├── ml/                   # Machine Learning pipeline
-│   ├── data/raw/         # Dữ liệu mẫu
+│   ├── data/raw/         # Dữ liệu raw public + ranking Elo-derived
 │   ├── data/processed/   # Dataset sau xử lý
 │   ├── models/           # Model sau train
-│   ├── reports/          # Metrics đánh giá
+│   ├── notebooks/        # Notebook EDA
+│   ├── reports/          # Metrics, figures, báo cáo
 │   └── src/
+│       ├── ingest_data.py
+│       ├── eda.py
 │       ├── data_processing.py
 │       ├── features.py
 │       ├── train.py
@@ -59,6 +62,8 @@ cd ml
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+python -m src.ingest_data
+python -m src.eda
 python -m src.train
 python -m src.predict --home "France" --away "Japan"
 ```
@@ -68,7 +73,11 @@ Kết quả train được lưu tại:
 - `ml/models/result_classifier.joblib`
 - `ml/models/score_regressor.joblib`
 - `ml/reports/training_metrics.json`
+- `ml/reports/eda_summary.json`
+- `ml/reports/figures/`
 - `ml/data/processed/training_dataset.csv`
+
+`ml/data/raw/matches.csv` được tải từ dataset public International Football Results. `ml/data/raw/rankings.csv` là ranking Elo-derived để pipeline có thể tái lập mà không cần API key.
 
 ## API chính
 
@@ -76,6 +85,7 @@ Kết quả train được lưu tại:
 GET /api/health
 GET /api/teams
 GET /api/matches
+GET /api/model/metrics
 GET /api/predictions
 POST /api/predictions
 ```
@@ -88,16 +98,18 @@ Body mẫu:
   "awayTeam": "Japan",
   "matchDate": "2026-06-15",
   "country": "United States",
+  "tournament": "FIFA World Cup",
   "neutral": true
 }
 ```
 
 ## Đánh giá đúng yêu cầu
 
-Project hiện có hai phần rõ ràng:
+- `ml/`: trọng tâm Data Science, gồm ingest dữ liệu, EDA, feature engineering, train/evaluate model, predict CLI và báo cáo.
+- `backend/`: Express API, lưu lịch sử dự đoán vào PostgreSQL, gọi trực tiếp `ml/src/predict.py` để dùng model `.joblib`.
+- `frontend/`: demo web nhập hai đội, hiển thị xác suất, tỷ số, model tốt nhất, top features và metrics đánh giá.
 
-- `ml/`: đúng trọng tâm đề tài Machine Learning, gồm dữ liệu mẫu, feature engineering, train model, predict CLI và báo cáo metrics.
-- `backend/` + `frontend/`: prototype/demo để người dùng nhập hai đội tuyển và xem dự đoán.
+## Ghi chú học thuật
 
-Lưu ý: backend hiện dùng heuristic baseline để demo nhanh trên web. Phần model ML thật nằm trong `ml/`; bước nâng cấp tiếp theo là nạp model `.joblib` từ `ml/models/` vào backend hoặc tạo Python prediction service riêng.
+Model tốt nhất không nhất thiết có accuracy rất cao vì bóng đá có độ nhiễu lớn. Điểm quan trọng của dự án là pipeline Data Science rõ ràng: dữ liệu thật, feature có lý do, evaluation theo thời gian, metrics minh bạch và demo sử dụng đúng model đã train.
 

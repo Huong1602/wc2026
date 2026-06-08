@@ -1,0 +1,10 @@
+.git
+**/node_modules
+**/dist
+ml/.venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.streamlit
+npm-debug.log*
+

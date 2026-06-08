@@ -1,38 +1,11 @@
-# Dự đoán kết quả các trận bóng đá World Cup 2026
+# Machine Learning Pipeline - WC 2026 Prediction
 
-Project này xây dựng baseline Machine Learning để dự đoán kết quả trận đấu bóng đá quốc tế, hướng tới FIFA World Cup 2026.
+Thư mục này chứa toàn bộ phần Data Science của dự án dự đoán kết quả bóng đá World Cup 2026.
 
-## Mục tiêu
-
-- Chuẩn hóa dữ liệu lịch sử trận đấu và bảng xếp hạng FIFA.
-- Tạo đặc trưng: phong độ gần đây, hiệu số bàn thắng bại, lịch sử đối đầu, ranking, lợi thế chủ nhà.
-- Huấn luyện mô hình phân loại kết quả `home_win`, `draw`, `away_win`.
-- Huấn luyện mô hình hồi quy thử nghiệm để dự đoán tỷ số.
-- Cung cấp CLI và demo Streamlit để nhập hai đội tuyển và nhận dự báo.
-
-## Cấu trúc thư mục
+## Luồng xử lý
 
 ```text
-wc2026-football-prediction/
-├── app/
-│   └── streamlit_app.py
-├── data/
-│   ├── raw/
-│   │   ├── sample_fifa_rankings.csv
-│   │   └── sample_matches.csv
-│   └── processed/
-├── docs/
-│   └── project_proposal.md
-├── models/
-├── notebooks/
-├── reports/
-├── src/
-│   ├── config.py
-│   ├── data_processing.py
-│   ├── features.py
-│   ├── predict.py
-│   └── train.py
-└── requirements.txt
+ingest_data.py -> eda.py -> train.py -> predict.py
 ```
 
 ## Cài đặt
@@ -43,42 +16,51 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## Huấn luyện mô hình
+## Chạy pipeline
 
 ```powershell
+python -m src.ingest_data
+python -m src.eda
 python -m src.train
-```
-
-Kết quả sẽ được lưu vào:
-
-- `models/result_classifier.joblib`
-- `models/score_regressor.joblib`
-- `reports/training_metrics.json`
-- `data/processed/training_dataset.csv`
-
-## Dự đoán bằng CLI
-
-```powershell
+python -m src.validate_pipeline
 python -m src.predict --home "France" --away "Japan"
 ```
 
-Ví dụ output:
+## Output chính
 
-```text
-France vs Japan
-France thắng: 52.00%
-Hòa: 25.00%
-Japan thắng: 23.00%
-Tỷ số dự đoán: France 2 - 1 Japan
+- `data/raw/matches.csv`: dữ liệu trận quốc tế public.
+- `data/raw/rankings.csv`: ranking Elo-derived theo thời gian.
+- `data/processed/training_dataset.csv`: dataset đã feature engineering.
+- `models/result_classifier.joblib`: model phân loại thắng/hòa/thua.
+- `models/score_regressor.joblib`: model dự đoán tỷ số.
+- `reports/training_metrics.json`: metrics model.
+- `reports/eda_summary.json`: kết quả EDA.
+- `reports/figures/`: biểu đồ EDA và confusion matrix.
+- `reports/final_report.md`: báo cáo học thuật tóm tắt.
+
+## Prediction contract
+
+`python -m src.predict --home "France" --away "Japan"` trả JSON:
+
+```json
+{
+  "homeTeam": "France",
+  "awayTeam": "Japan",
+  "probabilities": {
+    "homeWin": 0.31,
+    "draw": 0.37,
+    "awayWin": 0.32
+  },
+  "predictedScore": {
+    "home": 1,
+    "away": 1
+  },
+  "modelName": "random_forest",
+  "topFeatures": ["rank_diff", "home_rank", "away_rank"]
+}
 ```
 
-## Chạy demo
+## Ghi chú
 
-```powershell
-streamlit run app/streamlit_app.py
-```
-
-## Ghi chú dữ liệu
-
-Hai file trong `data/raw/` chỉ là dữ liệu mẫu để chạy thử pipeline. Khi làm báo cáo hoặc demo chính thức, nên thay bằng dữ liệu lịch sử đầy đủ từ các nguồn đáng tin cậy như FIFA, Kaggle football results dataset, football-data.co.uk hoặc các API thể thao.
+Ranking hiện tại là Elo-derived vì nguồn FIFA ranking lịch sử dạng CSV ổn định thường cần API hoặc tải thủ công. Cách này phù hợp cho bài tập lớn vì tái lập được, không cần API key, và vẫn đại diện cho sức mạnh tương đối của đội tuyển theo thời gian.
 

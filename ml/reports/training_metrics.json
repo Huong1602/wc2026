@@ -1,0 +1,242 @@
+{
+  "dataset": {
+    "rows": 6000,
+    "train_rows": 4800,
+    "test_rows": 1200,
+    "date_min": "2019-12-05",
+    "date_max": "2026-06-06",
+    "split": "time_based_80_20",
+    "target_distribution": {
+      "home_win": 0.4767,
+      "away_win": 0.2927,
+      "draw": 0.2307
+    }
+  },
+  "models": {
+    "logistic_regression": {
+      "accuracy": 0.5658333333333333,
+      "macro_f1": 0.5186589325292261,
+      "classification_report": {
+        "away_win": {
+          "precision": 0.5748031496062992,
+          "recall": 0.6311239193083573,
+          "f1-score": 0.6016483516483516,
+          "support": 347.0
+        },
+        "draw": {
+          "precision": 0.26838235294117646,
+          "recall": 0.27037037037037037,
+          "f1-score": 0.2693726937269373,
+          "support": 270.0
+        },
+        "home_win": {
+          "precision": 0.7074954296160878,
+          "recall": 0.6638078902229846,
+          "f1-score": 0.6849557522123894,
+          "support": 583.0
+        },
+        "accuracy": 0.5658333333333333,
+        "macro avg": {
+          "precision": 0.5168936440545212,
+          "recall": 0.5217673933005708,
+          "f1-score": 0.5186589325292261,
+          "support": 1200.0
+        },
+        "weighted avg": {
+          "precision": 0.5703248030614022,
+          "recall": 0.5658333333333333,
+          "f1-score": 0.5673598407233951,
+          "support": 1200.0
+        }
+      },
+      "confusion_matrix_figure": "C:\\Users\\Admin\\OneDrive\\Documents\\WC2026 Prediction Platform\\ml\\reports\\figures\\confusion_matrix_logistic_regression.png",
+      "top_features": [
+        {
+          "feature": "rank_diff",
+          "importance": 0.30524853060582274
+        },
+        {
+          "feature": "away_rank",
+          "importance": 0.17271571998468985
+        },
+        {
+          "feature": "home_rank",
+          "importance": 0.13901557879319346
+        },
+        {
+          "feature": "recent_goal_diff_delta",
+          "importance": 0.13824508197341764
+        },
+        {
+          "feature": "home_recent_goal_diff",
+          "importance": 0.1251144535297399
+        },
+        {
+          "feature": "home_recent_goals_for",
+          "importance": 0.08927142329647925
+        },
+        {
+          "feature": "neutral",
+          "importance": 0.08223511921406167
+        },
+        {
+          "feature": "away_recent_goal_diff",
+          "importance": 0.0821669227858362
+        }
+      ],
+      "log_loss": 0.8929059487754182
+    },
+    "random_forest": {
+      "accuracy": 0.5891666666666666,
+      "macro_f1": 0.5235992226128837,
+      "classification_report": {
+        "away_win": {
+          "precision": 0.5792207792207792,
+          "recall": 0.6426512968299711,
+          "f1-score": 0.6092896174863388,
+          "support": 347.0
+        },
+        "draw": {
+          "precision": 0.2783018867924528,
+          "recall": 0.21851851851851853,
+          "f1-score": 0.24481327800829875,
+          "support": 270.0
+        },
+        "home_win": {
+          "precision": 0.7048092868988391,
+          "recall": 0.7289879931389366,
+          "f1-score": 0.7166947723440135,
+          "support": 583.0
+        },
+        "accuracy": 0.5891666666666666,
+        "macro avg": {
+          "precision": 0.520777317637357,
+          "recall": 0.5300526028291421,
+          "f1-score": 0.5235992226128837,
+          "support": 1200.0
+        },
+        "weighted avg": {
+          "precision": 0.5725291117379966,
+          "recall": 0.5891666666666666,
+          "f1-score": 0.5794634455054667,
+          "support": 1200.0
+        }
+      },
+      "confusion_matrix_figure": "C:\\Users\\Admin\\OneDrive\\Documents\\WC2026 Prediction Platform\\ml\\reports\\figures\\confusion_matrix_random_forest.png",
+      "top_features": [
+        {
+          "feature": "rank_diff",
+          "importance": 0.24182970121202918
+        },
+        {
+          "feature": "home_rank",
+          "importance": 0.10573429637056195
+        },
+        {
+          "feature": "away_rank",
+          "importance": 0.09769383493084277
+        },
+        {
+          "feature": "recent_goal_diff_delta",
+          "importance": 0.08579185239880474
+        },
+        {
+          "feature": "home_recent_goal_diff",
+          "importance": 0.05361227247262305
+        },
+        {
+          "feature": "recent_points_diff",
+          "importance": 0.05216087978745045
+        },
+        {
+          "feature": "away_recent_goal_diff",
+          "importance": 0.04309299070999469
+        },
+        {
+          "feature": "away_days_since_last_match",
+          "importance": 0.04027166152760407
+        }
+      ],
+      "log_loss": 0.8879289244567021
+    },
+    "xgboost": {
+      "accuracy": 0.6033333333333334,
+      "macro_f1": 0.45466265864341665,
+      "classification_report": {
+        "away_win": {
+          "precision": 0.562962962962963,
+          "recall": 0.6570605187319885,
+          "f1-score": 0.6063829787234043,
+          "support": 347.0
+        },
+        "draw": {
+          "precision": 0.25,
+          "recall": 0.018518518518518517,
+          "f1-score": 0.034482758620689655,
+          "support": 270.0
+        },
+        "home_win": {
+          "precision": 0.6335483870967742,
+          "recall": 0.8421955403087479,
+          "f1-score": 0.7231222385861561,
+          "support": 583.0
+        },
+        "accuracy": 0.6033333333333334,
+        "macro avg": {
+          "precision": 0.48217045001991243,
+          "recall": 0.5059248591864183,
+          "f1-score": 0.45466265864341665,
+          "support": 1200.0
+        },
+        "weighted avg": {
+          "precision": 0.526839048187973,
+          "recall": 0.6033333333333334,
+          "f1-score": 0.5344212529502804,
+          "support": 1200.0
+        }
+      },
+      "confusion_matrix_figure": "C:\\Users\\Admin\\OneDrive\\Documents\\WC2026 Prediction Platform\\ml\\reports\\figures\\confusion_matrix_xgboost.png",
+      "top_features": [
+        {
+          "feature": "rank_diff",
+          "importance": 0.3073829710483551
+        },
+        {
+          "feature": "recent_goal_diff_delta",
+          "importance": 0.0770799070596695
+        },
+        {
+          "feature": "neutral",
+          "importance": 0.049440786242485046
+        },
+        {
+          "feature": "away_rank",
+          "importance": 0.04734886437654495
+        },
+        {
+          "feature": "home_rank",
+          "importance": 0.04584874212741852
+        },
+        {
+          "feature": "home_recent_goal_diff",
+          "importance": 0.03833711892366409
+        },
+        {
+          "feature": "away_is_2026_host",
+          "importance": 0.03430428355932236
+        },
+        {
+          "feature": "home_recent_goals_for",
+          "importance": 0.03232255578041077
+        }
+      ],
+      "log_loss": 0.8553124070167542
+    }
+  },
+  "score_regression": {
+    "model": "random_forest_regressor",
+    "home_score_mae": 1.0766507309580342,
+    "away_score_mae": 0.9006919593898229
+  },
+  "best_model": "random_forest"
+}

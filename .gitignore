@@ -7,6 +7,4 @@ npm-debug.log*
 __pycache__/
 *.pyc
 .pytest_cache/
-ml/models/*.joblib
-ml/reports/*.json
-ml/data/processed/*.csv
+ml/reports/latest_prediction.json

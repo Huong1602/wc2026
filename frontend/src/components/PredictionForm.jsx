@@ -5,6 +5,7 @@ export default function PredictionForm({ teams, loading, onSubmit }) {
   const [awayTeam, setAwayTeam] = useState("Japan");
   const [matchDate, setMatchDate] = useState("2026-06-15");
   const [country, setCountry] = useState("United States");
+  const [tournament, setTournament] = useState("FIFA World Cup");
   const [neutral, setNeutral] = useState(true);
 
   function handleSubmit(event) {
@@ -14,6 +15,7 @@ export default function PredictionForm({ teams, loading, onSubmit }) {
       awayTeam,
       matchDate,
       country,
+      tournament,
       neutral,
     });
   }
@@ -21,7 +23,7 @@ export default function PredictionForm({ teams, loading, onSubmit }) {
   return (
     <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl">
       <h2 className="text-xl font-semibold">Nhập trận đấu cần dự đoán</h2>
-      <p className="mt-1 text-sm text-slate-400">Chọn hai đội tuyển trong dữ liệu mẫu.</p>
+      <p className="mt-1 text-sm text-slate-400">Chọn hai đội tuyển trong dữ liệu demo PostgreSQL.</p>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
         <label className="block">
@@ -74,6 +76,19 @@ export default function PredictionForm({ teams, loading, onSubmit }) {
             <option>United States</option>
             <option>Canada</option>
             <option>Mexico</option>
+          </select>
+        </label>
+
+        <label className="block sm:col-span-2">
+          <span className="text-sm font-medium text-slate-300">Giải đấu</span>
+          <select
+            value={tournament}
+            onChange={(event) => setTournament(event.target.value)}
+            className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-slate-100 outline-none focus:border-emerald-400"
+          >
+            <option>FIFA World Cup</option>
+            <option>FIFA World Cup qualification</option>
+            <option>Friendly</option>
           </select>
         </label>
       </div>
