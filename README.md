@@ -113,7 +113,7 @@ Body mẫu:
 
 - `ml/`: trọng tâm Data Science, gồm ingest dữ liệu, EDA, feature engineering, train/evaluate model, predict CLI và báo cáo.
 - `backend/`: Express API, lưu lịch sử dự đoán vào PostgreSQL, gọi trực tiếp `ml/src/predict.py` để dùng model `.joblib`.
-- `frontend/`: demo web nhập hai đội, hiển thị xác suất, tỷ số, model tốt nhất, top features và metrics đánh giá.
+- `frontend/`: demo web nhập hai đội trong danh sách 48 đội World Cup 2026, hiển thị xác suất, tỷ số, model tốt nhất, top features và metrics đánh giá.
 
 ## Ghi chú học thuật
 

@@ -41,9 +41,9 @@ async function readCsv(filePath) {
 }
 
 export async function listMlTeams() {
-  const matchesPath = path.join(getMlDirectory(), "data", "raw", "matches.csv");
+  const groupsPath = path.join(getMlDirectory(), "data", "raw", "worldcup_2026_groups.csv");
   const rankingsPath = path.join(getMlDirectory(), "data", "raw", "rankings.csv");
-  const [matches, rankings] = await Promise.all([readCsv(matchesPath), readCsv(rankingsPath)]);
+  const [groups, rankings] = await Promise.all([readCsv(groupsPath), readCsv(rankingsPath)]);
 
   const latestRankingByTeam = new Map();
   for (const row of rankings) {
@@ -53,22 +53,23 @@ export async function listMlTeams() {
     }
   }
 
-  const teamNames = new Set();
-  for (const row of matches) {
-    if (row.home_team) teamNames.add(row.home_team);
-    if (row.away_team) teamNames.add(row.away_team);
-  }
-
-  return [...teamNames].sort((left, right) => left.localeCompare(right)).map((name, index) => {
+  return groups.map((row, index) => {
+    const name = row.team;
     const ranking = latestRankingByTeam.get(name);
     return {
       id: index + 1,
       name,
+      group: row.group,
+      slot: row.slot,
       confederation: "N/A",
       rank: ranking ? Number(ranking.rank) : null,
       points: ranking ? Number(ranking.points) : null,
-      source: "ml_dataset",
+      source: "worldcup_2026",
     };
   });
 }
 
+export async function isWorldCupTeam(teamName) {
+  const teams = await listMlTeams();
+  return teams.some((team) => team.name.toLowerCase() === String(teamName).trim().toLowerCase());
+}

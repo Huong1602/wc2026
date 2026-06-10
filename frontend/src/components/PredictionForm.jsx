@@ -23,7 +23,7 @@ export default function PredictionForm({ teams, loading, onSubmit }) {
   return (
     <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl">
       <h2 className="text-xl font-semibold">Nhập trận đấu cần dự đoán</h2>
-      <p className="mt-1 text-sm text-slate-400">Chọn hai đội tuyển trong dữ liệu demo PostgreSQL.</p>
+      <p className="mt-1 text-sm text-slate-400">Chọn hai đội tuyển thuộc danh sách 48 đội World Cup 2026.</p>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
         <label className="block">
@@ -113,4 +113,3 @@ export default function PredictionForm({ teams, loading, onSubmit }) {
     </form>
   );
 }
-

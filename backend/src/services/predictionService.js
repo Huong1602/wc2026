@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { pool } from "../config/db.js";
+import { isWorldCupTeam } from "./mlDataService.js";
 import { findOrCreateTeamByName } from "./teamService.js";
 
 function createBadRequest(message) {
@@ -118,6 +119,15 @@ export async function createMatchPrediction(payload) {
 
   if (homeTeamName.toLowerCase() === awayTeamName.toLowerCase()) {
     throw createBadRequest("Two teams must be different.");
+  }
+
+  const [homeIsWorldCupTeam, awayIsWorldCupTeam] = await Promise.all([
+    isWorldCupTeam(homeTeamName),
+    isWorldCupTeam(awayTeamName),
+  ]);
+
+  if (!homeIsWorldCupTeam || !awayIsWorldCupTeam) {
+    throw createBadRequest("Only FIFA World Cup 2026 teams are supported in this demo.");
   }
 
   const homeTeam = await findOrCreateTeamByName(homeTeamName);
