@@ -1,13 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-function getProjectRoot() {
-  return path.resolve(process.cwd(), "..");
-}
-
-function getMlDirectory() {
-  return process.env.ML_DIR || path.join(getProjectRoot(), "ml");
-}
+import { getMlDirectory } from "./mlDataService.js";
 
 export async function getModelMetrics() {
   const metricsPath = path.join(getMlDirectory(), "reports", "training_metrics.json");

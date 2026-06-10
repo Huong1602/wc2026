@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { pool } from "../config/db.js";
-import { findTeamByName } from "./teamService.js";
+import { findOrCreateTeamByName } from "./teamService.js";
 
 function createBadRequest(message) {
   const error = new Error(message);
@@ -120,12 +120,8 @@ export async function createMatchPrediction(payload) {
     throw createBadRequest("Two teams must be different.");
   }
 
-  const homeTeam = await findTeamByName(homeTeamName);
-  const awayTeam = await findTeamByName(awayTeamName);
-
-  if (!homeTeam || !awayTeam) {
-    throw createBadRequest("Team is not available in the demo database.");
-  }
+  const homeTeam = await findOrCreateTeamByName(homeTeamName);
+  const awayTeam = await findOrCreateTeamByName(awayTeamName);
 
   const mlPrediction = await runPythonPrediction({
     homeTeam: homeTeam.name,

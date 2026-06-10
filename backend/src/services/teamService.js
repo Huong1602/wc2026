@@ -1,26 +1,8 @@
 import { pool } from "../config/db.js";
+import { listMlTeams } from "./mlDataService.js";
 
 export async function listTeams() {
-  const query = `
-    SELECT
-      teams.id,
-      teams.name,
-      teams.confederation,
-      rankings.rank,
-      rankings.points
-    FROM teams
-    LEFT JOIN LATERAL (
-      SELECT rank, points
-      FROM fifa_rankings
-      WHERE fifa_rankings.team_id = teams.id
-      ORDER BY ranking_date DESC
-      LIMIT 1
-    ) rankings ON TRUE
-    ORDER BY teams.name ASC
-  `;
-
-  const result = await pool.query(query);
-  return result.rows;
+  return listMlTeams();
 }
 
 export async function findTeamByName(name) {
@@ -32,3 +14,21 @@ export async function findTeamByName(name) {
   return result.rows[0] || null;
 }
 
+export async function findOrCreateTeamByName(name) {
+  const existingTeam = await findTeamByName(name);
+  if (existingTeam) {
+    return existingTeam;
+  }
+
+  const result = await pool.query(
+    `
+      INSERT INTO teams (name, confederation)
+      VALUES ($1, $2)
+      ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name
+      RETURNING id, name, confederation
+    `,
+    [name, "N/A"]
+  );
+
+  return result.rows[0];
+}
