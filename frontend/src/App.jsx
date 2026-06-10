@@ -1,34 +1,47 @@
 import { useEffect, useState } from "react";
 
-import { createPrediction, fetchMatches, fetchModelMetrics, fetchPredictions, fetchTeams } from "./api.js";
+import {
+  createPrediction,
+  fetchMatches,
+  fetchModelMetrics,
+  fetchPredictions,
+  fetchTeams,
+  fetchTournamentSimulation,
+  runTournamentSimulation,
+} from "./api.js";
 import MatchTable from "./components/MatchTable.jsx";
 import ModelEvaluation from "./components/ModelEvaluation.jsx";
 import PredictionForm from "./components/PredictionForm.jsx";
 import PredictionHistory from "./components/PredictionHistory.jsx";
 import PredictionResult from "./components/PredictionResult.jsx";
 import TeamTable from "./components/TeamTable.jsx";
+import TournamentSimulation from "./components/TournamentSimulation.jsx";
 
 export default function App() {
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
   const [history, setHistory] = useState([]);
   const [evaluation, setEvaluation] = useState(null);
+  const [tournamentSimulation, setTournamentSimulation] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [simulationLoading, setSimulationLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function loadDashboardData() {
     try {
-      const [teamData, matchData, predictionData, evaluationData] = await Promise.all([
+      const [teamData, matchData, predictionData, evaluationData, tournamentData] = await Promise.all([
         fetchTeams(),
         fetchMatches(),
         fetchPredictions(),
         fetchModelMetrics(),
+        fetchTournamentSimulation().catch(() => null),
       ]);
       setTeams(teamData);
       setMatches(matchData);
       setHistory(predictionData);
       setEvaluation(evaluationData);
+      setTournamentSimulation(tournamentData);
     } catch (requestError) {
       setError(requestError.message);
     }
@@ -50,6 +63,20 @@ export default function App() {
       setError(requestError.message);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleRunTournamentSimulation(simulations) {
+    setSimulationLoading(true);
+    setError("");
+
+    try {
+      const result = await runTournamentSimulation(simulations);
+      setTournamentSimulation(result);
+    } catch (requestError) {
+      setError(requestError.message);
+    } finally {
+      setSimulationLoading(false);
     }
   }
 
@@ -90,10 +117,17 @@ export default function App() {
         </div>
 
         <div className="mt-8">
+          <TournamentSimulation
+            simulation={tournamentSimulation}
+            loading={simulationLoading}
+            onRun={handleRunTournamentSimulation}
+          />
+        </div>
+
+        <div className="mt-8">
           <PredictionHistory history={history} />
         </div>
       </section>
     </main>
   );
 }
-

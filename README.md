@@ -66,6 +66,7 @@ python -m src.ingest_data
 python -m src.eda
 python -m src.train
 python -m src.predict --home "France" --away "Japan"
+python -m src.tournament_simulator --simulations 100
 ```
 
 Kết quả train được lưu tại:
@@ -76,6 +77,9 @@ Kết quả train được lưu tại:
 - `ml/reports/eda_summary.json`
 - `ml/reports/figures/`
 - `ml/data/processed/training_dataset.csv`
+- `ml/reports/champion_probabilities.json`
+- `ml/reports/group_stage_simulation.json`
+- `ml/reports/knockout_bracket_prediction.json`
 
 `ml/data/raw/matches.csv` được tải từ dataset public International Football Results. `ml/data/raw/rankings.csv` là ranking Elo-derived để pipeline có thể tái lập mà không cần API key.
 
@@ -88,6 +92,8 @@ GET /api/matches
 GET /api/model/metrics
 GET /api/predictions
 POST /api/predictions
+GET /api/tournament/simulation
+POST /api/tournament/simulate
 ```
 
 Body mẫu:
@@ -113,3 +119,4 @@ Body mẫu:
 
 Model tốt nhất không nhất thiết có accuracy rất cao vì bóng đá có độ nhiễu lớn. Điểm quan trọng của dự án là pipeline Data Science rõ ràng: dữ liệu thật, feature có lý do, evaluation theo thời gian, metrics minh bạch và demo sử dụng đúng model đã train.
 
+Tính năng tournament simulation dùng model hiện tại để mô phỏng vòng bảng, chọn đội đi tiếp, sinh nhánh knockout và tính xác suất vô địch. Bracket Round of 32 hiện là deterministic approximation để phục vụ demo học thuật.

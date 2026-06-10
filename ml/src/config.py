@@ -19,6 +19,12 @@ REGRESSOR_FILE = MODELS_DIR / "score_regressor.joblib"
 METRICS_FILE = REPORTS_DIR / "training_metrics.json"
 EDA_REPORT_FILE = REPORTS_DIR / "eda_summary.json"
 PREDICTION_OUTPUT_FILE = REPORTS_DIR / "latest_prediction.json"
+WORLDCUP_GROUPS_FILE = RAW_DATA_DIR / "worldcup_2026_groups.csv"
+WORLDCUP_FIXTURES_FILE = RAW_DATA_DIR / "worldcup_2026_group_fixtures.csv"
+WORLDCUP_KNOCKOUT_TEMPLATE_FILE = RAW_DATA_DIR / "worldcup_2026_knockout_template.csv"
+GROUP_STAGE_SIMULATION_FILE = REPORTS_DIR / "group_stage_simulation.json"
+KNOCKOUT_BRACKET_FILE = REPORTS_DIR / "knockout_bracket_prediction.json"
+CHAMPION_PROBABILITIES_FILE = REPORTS_DIR / "champion_probabilities.json"
 
 INTERNATIONAL_RESULTS_URL = "https://raw.githubusercontent.com/martj42/international_results/master/results.csv"
 

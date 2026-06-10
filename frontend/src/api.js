@@ -40,3 +40,13 @@ export function createPrediction(data) {
   });
 }
 
+export function fetchTournamentSimulation() {
+  return request("/tournament/simulation");
+}
+
+export function runTournamentSimulation(simulations = 10000) {
+  return request("/tournament/simulate", {
+    method: "POST",
+    body: JSON.stringify({ simulations }),
+  });
+}

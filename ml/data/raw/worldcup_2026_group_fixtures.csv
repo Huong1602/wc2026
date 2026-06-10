@@ -1,0 +1,73 @@
+match_no,group,date,home_team,away_team,neutral,country
+1,A,2026-06-11,Mexico,South Africa,false,Mexico
+2,A,2026-06-11,South Korea,Czech Republic,true,Mexico
+3,A,2026-06-18,Mexico,South Korea,false,Mexico
+4,A,2026-06-18,Czech Republic,South Africa,true,Mexico
+5,A,2026-06-24,Czech Republic,Mexico,false,Mexico
+6,A,2026-06-24,South Africa,South Korea,true,Mexico
+7,B,2026-06-12,Canada,Bosnia and Herzegovina,false,Canada
+8,B,2026-06-12,Qatar,Switzerland,true,United States
+9,B,2026-06-19,Canada,Qatar,false,Canada
+10,B,2026-06-19,Switzerland,Bosnia and Herzegovina,true,United States
+11,B,2026-06-24,Switzerland,Canada,false,Canada
+12,B,2026-06-24,Bosnia and Herzegovina,Qatar,true,United States
+13,C,2026-06-13,Brazil,Morocco,true,United States
+14,C,2026-06-13,Haiti,Scotland,true,United States
+15,C,2026-06-20,Brazil,Haiti,true,United States
+16,C,2026-06-20,Scotland,Morocco,true,United States
+17,C,2026-06-26,Scotland,Brazil,true,United States
+18,C,2026-06-26,Morocco,Haiti,true,United States
+19,D,2026-06-12,United States,Paraguay,false,United States
+20,D,2026-06-13,Australia,Turkey,true,United States
+21,D,2026-06-19,United States,Australia,false,United States
+22,D,2026-06-19,Turkey,Paraguay,true,United States
+23,D,2026-06-25,Turkey,United States,false,United States
+24,D,2026-06-25,Paraguay,Australia,true,United States
+25,E,2026-06-14,Germany,Curacao,true,Canada
+26,E,2026-06-14,Ivory Coast,Ecuador,true,United States
+27,E,2026-06-20,Germany,Ivory Coast,true,Canada
+28,E,2026-06-20,Ecuador,Curacao,true,United States
+29,E,2026-06-26,Ecuador,Germany,true,United States
+30,E,2026-06-26,Curacao,Ivory Coast,true,Canada
+31,F,2026-06-14,Netherlands,Japan,true,United States
+32,F,2026-06-15,Sweden,Tunisia,true,Mexico
+33,F,2026-06-21,Netherlands,Sweden,true,United States
+34,F,2026-06-21,Tunisia,Japan,true,Mexico
+35,F,2026-06-27,Tunisia,Netherlands,true,United States
+36,F,2026-06-27,Japan,Sweden,true,Mexico
+37,G,2026-06-15,Belgium,Egypt,true,Canada
+38,G,2026-06-15,Iran,New Zealand,true,United States
+39,G,2026-06-21,Belgium,Iran,true,United States
+40,G,2026-06-21,New Zealand,Egypt,true,Canada
+41,G,2026-06-27,New Zealand,Belgium,true,United States
+42,G,2026-06-27,Egypt,Iran,true,Canada
+43,H,2026-06-15,Spain,Cape Verde,true,United States
+44,H,2026-06-16,Saudi Arabia,Uruguay,true,United States
+45,H,2026-06-22,Spain,Saudi Arabia,true,United States
+46,H,2026-06-22,Uruguay,Cape Verde,true,United States
+47,H,2026-06-27,Uruguay,Spain,true,United States
+48,H,2026-06-27,Cape Verde,Saudi Arabia,true,United States
+49,I,2026-06-16,France,Senegal,true,United States
+50,I,2026-06-16,Iraq,Norway,true,United States
+51,I,2026-06-22,France,Iraq,true,United States
+52,I,2026-06-22,Norway,Senegal,true,United States
+53,I,2026-06-27,Norway,France,true,United States
+54,I,2026-06-27,Senegal,Iraq,true,United States
+55,J,2026-06-16,Argentina,Algeria,true,United States
+56,J,2026-06-17,Austria,Jordan,true,United States
+57,J,2026-06-23,Argentina,Austria,true,United States
+58,J,2026-06-23,Jordan,Algeria,true,United States
+59,J,2026-06-27,Jordan,Argentina,true,United States
+60,J,2026-06-27,Algeria,Austria,true,United States
+61,K,2026-06-17,Portugal,DR Congo,true,United States
+62,K,2026-06-17,Uzbekistan,Colombia,true,United States
+63,K,2026-06-23,Portugal,Uzbekistan,true,United States
+64,K,2026-06-23,Colombia,DR Congo,true,United States
+65,K,2026-06-27,Colombia,Portugal,true,United States
+66,K,2026-06-27,DR Congo,Uzbekistan,true,United States
+67,L,2026-06-17,England,Croatia,true,United States
+68,L,2026-06-18,Ghana,Panama,true,United States
+69,L,2026-06-24,England,Ghana,true,United States
+70,L,2026-06-24,Panama,Croatia,true,United States
+71,L,2026-06-27,Panama,England,true,United States
+72,L,2026-06-27,Croatia,Ghana,true,United States

@@ -1,0 +1,17 @@
+match_no,round,home_slot,away_slot
+73,round_of_32,W_A,T8
+74,round_of_32,R_A,R_B
+75,round_of_32,W_C,T7
+76,round_of_32,W_D,R_E
+77,round_of_32,W_E,T6
+78,round_of_32,R_C,R_D
+79,round_of_32,W_F,T5
+80,round_of_32,W_G,R_H
+81,round_of_32,W_H,T4
+82,round_of_32,R_F,R_G
+83,round_of_32,W_I,T3
+84,round_of_32,W_J,R_K
+85,round_of_32,W_K,T2
+86,round_of_32,R_I,R_J
+87,round_of_32,W_L,T1
+88,round_of_32,W_B,R_L

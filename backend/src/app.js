@@ -6,6 +6,7 @@ import matchRoutes from "./routes/matchRoutes.js";
 import modelRoutes from "./routes/modelRoutes.js";
 import predictionRoutes from "./routes/predictionRoutes.js";
 import teamRoutes from "./routes/teamRoutes.js";
+import tournamentRoutes from "./routes/tournamentRoutes.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/teams", teamRoutes);
 app.use("/api/matches", matchRoutes);
 app.use("/api/model", modelRoutes);
 app.use("/api/predictions", predictionRoutes);
+app.use("/api/tournament", tournamentRoutes);
 
 app.use((request, response) => {
   response.status(404).json({

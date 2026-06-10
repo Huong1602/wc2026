@@ -1,0 +1,439 @@
+{
+  "simulationCount": 100,
+  "modelName": "random_forest",
+  "generatedAt": "2026-06-10T15:53:49.327993+00:00",
+  "teams": [
+    {
+      "team": "France",
+      "championProbability": 0.1,
+      "finalProbability": 0.19,
+      "semiFinalProbability": 0.25,
+      "quarterFinalProbability": 0.34,
+      "roundOf32Probability": 0.89,
+      "qualificationProbability": 0.89
+    },
+    {
+      "team": "Belgium",
+      "championProbability": 0.09,
+      "finalProbability": 0.14,
+      "semiFinalProbability": 0.23,
+      "quarterFinalProbability": 0.38,
+      "roundOf32Probability": 0.88,
+      "qualificationProbability": 0.88
+    },
+    {
+      "team": "Germany",
+      "championProbability": 0.09,
+      "finalProbability": 0.13,
+      "semiFinalProbability": 0.22,
+      "quarterFinalProbability": 0.38,
+      "roundOf32Probability": 0.92,
+      "qualificationProbability": 0.92
+    },
+    {
+      "team": "Portugal",
+      "championProbability": 0.09,
+      "finalProbability": 0.09,
+      "semiFinalProbability": 0.19,
+      "quarterFinalProbability": 0.31,
+      "roundOf32Probability": 0.86,
+      "qualificationProbability": 0.86
+    },
+    {
+      "team": "England",
+      "championProbability": 0.08,
+      "finalProbability": 0.12,
+      "semiFinalProbability": 0.2,
+      "quarterFinalProbability": 0.32,
+      "roundOf32Probability": 0.93,
+      "qualificationProbability": 0.93
+    },
+    {
+      "team": "Argentina",
+      "championProbability": 0.06,
+      "finalProbability": 0.09,
+      "semiFinalProbability": 0.15,
+      "quarterFinalProbability": 0.36,
+      "roundOf32Probability": 0.95,
+      "qualificationProbability": 0.95
+    },
+    {
+      "team": "Morocco",
+      "championProbability": 0.06,
+      "finalProbability": 0.14,
+      "semiFinalProbability": 0.23,
+      "quarterFinalProbability": 0.35,
+      "roundOf32Probability": 0.89,
+      "qualificationProbability": 0.89
+    },
+    {
+      "team": "Mexico",
+      "championProbability": 0.05,
+      "finalProbability": 0.07,
+      "semiFinalProbability": 0.13,
+      "quarterFinalProbability": 0.3,
+      "roundOf32Probability": 0.83,
+      "qualificationProbability": 0.83
+    },
+    {
+      "team": "Netherlands",
+      "championProbability": 0.05,
+      "finalProbability": 0.08,
+      "semiFinalProbability": 0.18,
+      "quarterFinalProbability": 0.21,
+      "roundOf32Probability": 0.79,
+      "qualificationProbability": 0.79
+    },
+    {
+      "team": "Turkey",
+      "championProbability": 0.04,
+      "finalProbability": 0.09,
+      "semiFinalProbability": 0.15,
+      "quarterFinalProbability": 0.26,
+      "roundOf32Probability": 0.91,
+      "qualificationProbability": 0.91
+    },
+    {
+      "team": "Brazil",
+      "championProbability": 0.03,
+      "finalProbability": 0.09,
+      "semiFinalProbability": 0.19,
+      "quarterFinalProbability": 0.31,
+      "roundOf32Probability": 0.84,
+      "qualificationProbability": 0.84
+    },
+    {
+      "team": "Japan",
+      "championProbability": 0.03,
+      "finalProbability": 0.05,
+      "semiFinalProbability": 0.12,
+      "quarterFinalProbability": 0.27,
+      "roundOf32Probability": 0.86,
+      "qualificationProbability": 0.86
+    },
+    {
+      "team": "South Korea",
+      "championProbability": 0.03,
+      "finalProbability": 0.04,
+      "semiFinalProbability": 0.05,
+      "quarterFinalProbability": 0.11,
+      "roundOf32Probability": 0.73,
+      "qualificationProbability": 0.73
+    },
+    {
+      "team": "Spain",
+      "championProbability": 0.03,
+      "finalProbability": 0.08,
+      "semiFinalProbability": 0.16,
+      "quarterFinalProbability": 0.39,
+      "roundOf32Probability": 0.98,
+      "qualificationProbability": 0.98
+    },
+    {
+      "team": "Switzerland",
+      "championProbability": 0.03,
+      "finalProbability": 0.04,
+      "semiFinalProbability": 0.1,
+      "quarterFinalProbability": 0.34,
+      "roundOf32Probability": 0.78,
+      "qualificationProbability": 0.78
+    },
+    {
+      "team": "Ecuador",
+      "championProbability": 0.02,
+      "finalProbability": 0.04,
+      "semiFinalProbability": 0.11,
+      "quarterFinalProbability": 0.28,
+      "roundOf32Probability": 0.91,
+      "qualificationProbability": 0.91
+    },
+    {
+      "team": "Norway",
+      "championProbability": 0.02,
+      "finalProbability": 0.03,
+      "semiFinalProbability": 0.08,
+      "quarterFinalProbability": 0.12,
+      "roundOf32Probability": 0.7,
+      "qualificationProbability": 0.7
+    },
+    {
+      "team": "Australia",
+      "championProbability": 0.01,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.06,
+      "quarterFinalProbability": 0.11,
+      "roundOf32Probability": 0.62,
+      "qualificationProbability": 0.62
+    },
+    {
+      "team": "Austria",
+      "championProbability": 0.01,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.06,
+      "quarterFinalProbability": 0.16,
+      "roundOf32Probability": 0.73,
+      "qualificationProbability": 0.73
+    },
+    {
+      "team": "Canada",
+      "championProbability": 0.01,
+      "finalProbability": 0.03,
+      "semiFinalProbability": 0.07,
+      "quarterFinalProbability": 0.18,
+      "roundOf32Probability": 0.91,
+      "qualificationProbability": 0.91
+    },
+    {
+      "team": "Colombia",
+      "championProbability": 0.01,
+      "finalProbability": 0.05,
+      "semiFinalProbability": 0.12,
+      "quarterFinalProbability": 0.23,
+      "roundOf32Probability": 0.79,
+      "qualificationProbability": 0.79
+    },
+    {
+      "team": "Croatia",
+      "championProbability": 0.01,
+      "finalProbability": 0.03,
+      "semiFinalProbability": 0.06,
+      "quarterFinalProbability": 0.16,
+      "roundOf32Probability": 0.89,
+      "qualificationProbability": 0.89
+    },
+    {
+      "team": "Czech Republic",
+      "championProbability": 0.01,
+      "finalProbability": 0.05,
+      "semiFinalProbability": 0.1,
+      "quarterFinalProbability": 0.22,
+      "roundOf32Probability": 0.68,
+      "qualificationProbability": 0.68
+    },
+    {
+      "team": "Egypt",
+      "championProbability": 0.01,
+      "finalProbability": 0.03,
+      "semiFinalProbability": 0.04,
+      "quarterFinalProbability": 0.12,
+      "roundOf32Probability": 0.73,
+      "qualificationProbability": 0.73
+    },
+    {
+      "team": "Iran",
+      "championProbability": 0.01,
+      "finalProbability": 0.06,
+      "semiFinalProbability": 0.12,
+      "quarterFinalProbability": 0.27,
+      "roundOf32Probability": 0.88,
+      "qualificationProbability": 0.88
+    },
+    {
+      "team": "Senegal",
+      "championProbability": 0.01,
+      "finalProbability": 0.02,
+      "semiFinalProbability": 0.06,
+      "quarterFinalProbability": 0.12,
+      "roundOf32Probability": 0.68,
+      "qualificationProbability": 0.68
+    },
+    {
+      "team": "Uruguay",
+      "championProbability": 0.01,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.05,
+      "quarterFinalProbability": 0.2,
+      "roundOf32Probability": 0.85,
+      "qualificationProbability": 0.85
+    },
+    {
+      "team": "Algeria",
+      "championProbability": 0.0,
+      "finalProbability": 0.03,
+      "semiFinalProbability": 0.06,
+      "quarterFinalProbability": 0.11,
+      "roundOf32Probability": 0.7,
+      "qualificationProbability": 0.7
+    },
+    {
+      "team": "Bosnia and Herzegovina",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.0,
+      "quarterFinalProbability": 0.05,
+      "roundOf32Probability": 0.64,
+      "qualificationProbability": 0.64
+    },
+    {
+      "team": "Cape Verde",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.02,
+      "quarterFinalProbability": 0.02,
+      "roundOf32Probability": 0.29,
+      "qualificationProbability": 0.29
+    },
+    {
+      "team": "Curacao",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.0,
+      "quarterFinalProbability": 0.01,
+      "roundOf32Probability": 0.24,
+      "qualificationProbability": 0.24
+    },
+    {
+      "team": "DR Congo",
+      "championProbability": 0.0,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.02,
+      "quarterFinalProbability": 0.09,
+      "roundOf32Probability": 0.46,
+      "qualificationProbability": 0.46
+    },
+    {
+      "team": "Ghana",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.0,
+      "quarterFinalProbability": 0.02,
+      "roundOf32Probability": 0.11,
+      "qualificationProbability": 0.11
+    },
+    {
+      "team": "Haiti",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.02,
+      "quarterFinalProbability": 0.03,
+      "roundOf32Probability": 0.28,
+      "qualificationProbability": 0.28
+    },
+    {
+      "team": "Iraq",
+      "championProbability": 0.0,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.02,
+      "quarterFinalProbability": 0.03,
+      "roundOf32Probability": 0.49,
+      "qualificationProbability": 0.49
+    },
+    {
+      "team": "Ivory Coast",
+      "championProbability": 0.0,
+      "finalProbability": 0.06,
+      "semiFinalProbability": 0.08,
+      "quarterFinalProbability": 0.12,
+      "roundOf32Probability": 0.63,
+      "qualificationProbability": 0.63
+    },
+    {
+      "team": "Jordan",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.0,
+      "quarterFinalProbability": 0.05,
+      "roundOf32Probability": 0.33,
+      "qualificationProbability": 0.33
+    },
+    {
+      "team": "New Zealand",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.0,
+      "quarterFinalProbability": 0.01,
+      "roundOf32Probability": 0.29,
+      "qualificationProbability": 0.29
+    },
+    {
+      "team": "Panama",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.02,
+      "quarterFinalProbability": 0.05,
+      "roundOf32Probability": 0.69,
+      "qualificationProbability": 0.69
+    },
+    {
+      "team": "Paraguay",
+      "championProbability": 0.0,
+      "finalProbability": 0.03,
+      "semiFinalProbability": 0.06,
+      "quarterFinalProbability": 0.11,
+      "roundOf32Probability": 0.56,
+      "qualificationProbability": 0.56
+    },
+    {
+      "team": "Qatar",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.01,
+      "quarterFinalProbability": 0.03,
+      "roundOf32Probability": 0.3,
+      "qualificationProbability": 0.3
+    },
+    {
+      "team": "Saudi Arabia",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.01,
+      "quarterFinalProbability": 0.04,
+      "roundOf32Probability": 0.44,
+      "qualificationProbability": 0.44
+    },
+    {
+      "team": "Scotland",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.02,
+      "quarterFinalProbability": 0.06,
+      "roundOf32Probability": 0.61,
+      "qualificationProbability": 0.61
+    },
+    {
+      "team": "South Africa",
+      "championProbability": 0.0,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.01,
+      "quarterFinalProbability": 0.01,
+      "roundOf32Probability": 0.36,
+      "qualificationProbability": 0.36
+    },
+    {
+      "team": "Sweden",
+      "championProbability": 0.0,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.06,
+      "quarterFinalProbability": 0.1,
+      "roundOf32Probability": 0.6,
+      "qualificationProbability": 0.6
+    },
+    {
+      "team": "Tunisia",
+      "championProbability": 0.0,
+      "finalProbability": 0.01,
+      "semiFinalProbability": 0.03,
+      "quarterFinalProbability": 0.06,
+      "roundOf32Probability": 0.37,
+      "qualificationProbability": 0.37
+    },
+    {
+      "team": "United States",
+      "championProbability": 0.0,
+      "finalProbability": 0.0,
+      "semiFinalProbability": 0.03,
+      "quarterFinalProbability": 0.09,
+      "roundOf32Probability": 0.55,
+      "qualificationProbability": 0.55
+    },
+    {
+      "team": "Uzbekistan",
+      "championProbability": 0.0,
+      "finalProbability": 0.02,
+      "semiFinalProbability": 0.05,
+      "quarterFinalProbability": 0.11,
+      "roundOf32Probability": 0.65,
+      "qualificationProbability": 0.65
+    }
+  ]
+}

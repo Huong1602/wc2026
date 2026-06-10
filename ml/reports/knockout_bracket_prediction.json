@@ -1,0 +1,359 @@
+{
+  "simulationCount": 100,
+  "representativeRun": 1,
+  "generatedAt": "2026-06-10T15:53:49.327993+00:00",
+  "bracket": {
+    "round_of_32": [
+      {
+        "matchNo": 73,
+        "round": "round_of_32",
+        "homeTeam": "South Korea",
+        "awayTeam": "Germany",
+        "homeWinProbability": 0.3420851612326475,
+        "awayWinProbability": 0.6579148387673525,
+        "homeScore": 3,
+        "awayScore": 2,
+        "winner": "South Korea"
+      },
+      {
+        "matchNo": 74,
+        "round": "round_of_32",
+        "homeTeam": "Czech Republic",
+        "awayTeam": "Qatar",
+        "homeWinProbability": 0.7951932120620964,
+        "awayWinProbability": 0.20480678793790363,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Czech Republic"
+      },
+      {
+        "matchNo": 75,
+        "round": "round_of_32",
+        "homeTeam": "Brazil",
+        "awayTeam": "Uzbekistan",
+        "homeWinProbability": 0.7251519648688953,
+        "awayWinProbability": 0.2748480351311047,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Brazil"
+      },
+      {
+        "matchNo": 76,
+        "round": "round_of_32",
+        "homeTeam": "Turkey",
+        "awayTeam": "Ivory Coast",
+        "homeWinProbability": 0.5801156105144112,
+        "awayWinProbability": 0.4198843894855887,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Turkey"
+      },
+      {
+        "matchNo": 77,
+        "round": "round_of_32",
+        "homeTeam": "Ecuador",
+        "awayTeam": "Senegal",
+        "homeWinProbability": 0.5767009496317319,
+        "awayWinProbability": 0.423299050368268,
+        "homeScore": 3,
+        "awayScore": 1,
+        "winner": "Ecuador"
+      },
+      {
+        "matchNo": 78,
+        "round": "round_of_32",
+        "homeTeam": "Scotland",
+        "awayTeam": "Paraguay",
+        "homeWinProbability": 0.421959822712529,
+        "awayWinProbability": 0.5780401772874709,
+        "homeScore": 3,
+        "awayScore": 1,
+        "winner": "Scotland"
+      },
+      {
+        "matchNo": 79,
+        "round": "round_of_32",
+        "homeTeam": "Netherlands",
+        "awayTeam": "New Zealand",
+        "homeWinProbability": 0.7388959303630178,
+        "awayWinProbability": 0.2611040696369823,
+        "homeScore": 3,
+        "awayScore": 0,
+        "winner": "Netherlands"
+      },
+      {
+        "matchNo": 80,
+        "round": "round_of_32",
+        "homeTeam": "Iran",
+        "awayTeam": "Saudi Arabia",
+        "homeWinProbability": 0.7199891514225033,
+        "awayWinProbability": 0.2800108485774966,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Iran"
+      },
+      {
+        "matchNo": 81,
+        "round": "round_of_32",
+        "homeTeam": "Spain",
+        "awayTeam": "Australia",
+        "homeWinProbability": 0.696144421152534,
+        "awayWinProbability": 0.303855578847466,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Spain"
+      },
+      {
+        "matchNo": 82,
+        "round": "round_of_32",
+        "homeTeam": "Japan",
+        "awayTeam": "Belgium",
+        "homeWinProbability": 0.4150278119615615,
+        "awayWinProbability": 0.5849721880384384,
+        "homeScore": 3,
+        "awayScore": 1,
+        "winner": "Japan"
+      },
+      {
+        "matchNo": 83,
+        "round": "round_of_32",
+        "homeTeam": "France",
+        "awayTeam": "England",
+        "homeWinProbability": 0.5305215785934743,
+        "awayWinProbability": 0.46947842140652574,
+        "homeScore": 3,
+        "awayScore": 1,
+        "winner": "France"
+      },
+      {
+        "matchNo": 84,
+        "round": "round_of_32",
+        "homeTeam": "Algeria",
+        "awayTeam": "Portugal",
+        "homeWinProbability": 0.37237045745147407,
+        "awayWinProbability": 0.6276295425485259,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Algeria"
+      },
+      {
+        "matchNo": 85,
+        "round": "round_of_32",
+        "homeTeam": "Colombia",
+        "awayTeam": "Switzerland",
+        "homeWinProbability": 0.5829022485997977,
+        "awayWinProbability": 0.41709775140020233,
+        "homeScore": 2,
+        "awayScore": 3,
+        "winner": "Switzerland"
+      },
+      {
+        "matchNo": 86,
+        "round": "round_of_32",
+        "homeTeam": "Iraq",
+        "awayTeam": "Argentina",
+        "homeWinProbability": 0.27198954493850563,
+        "awayWinProbability": 0.7280104550614942,
+        "homeScore": 1,
+        "awayScore": 2,
+        "winner": "Argentina"
+      },
+      {
+        "matchNo": 87,
+        "round": "round_of_32",
+        "homeTeam": "Croatia",
+        "awayTeam": "Jordan",
+        "homeWinProbability": 0.6983881519138992,
+        "awayWinProbability": 0.30161184808610086,
+        "homeScore": 2,
+        "awayScore": 3,
+        "winner": "Jordan"
+      },
+      {
+        "matchNo": 88,
+        "round": "round_of_32",
+        "homeTeam": "Canada",
+        "awayTeam": "Panama",
+        "homeWinProbability": 0.6083781701114196,
+        "awayWinProbability": 0.3916218298885804,
+        "homeScore": 1,
+        "awayScore": 2,
+        "winner": "Panama"
+      }
+    ],
+    "round_of_16": [
+      {
+        "matchNo": 89,
+        "round": "round_of_16",
+        "homeTeam": "South Korea",
+        "awayTeam": "Czech Republic",
+        "homeWinProbability": 0.5006197847023452,
+        "awayWinProbability": 0.49938021529765464,
+        "homeScore": 1,
+        "awayScore": 2,
+        "winner": "Czech Republic"
+      },
+      {
+        "matchNo": 90,
+        "round": "round_of_16",
+        "homeTeam": "Brazil",
+        "awayTeam": "Turkey",
+        "homeWinProbability": 0.5439704490265678,
+        "awayWinProbability": 0.4560295509734321,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Brazil"
+      },
+      {
+        "matchNo": 91,
+        "round": "round_of_16",
+        "homeTeam": "Ecuador",
+        "awayTeam": "Scotland",
+        "homeWinProbability": 0.5705023446162707,
+        "awayWinProbability": 0.4294976553837293,
+        "homeScore": 3,
+        "awayScore": 1,
+        "winner": "Ecuador"
+      },
+      {
+        "matchNo": 92,
+        "round": "round_of_16",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Iran",
+        "homeWinProbability": 0.5270245782315266,
+        "awayWinProbability": 0.4729754217684734,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Netherlands"
+      },
+      {
+        "matchNo": 93,
+        "round": "round_of_16",
+        "homeTeam": "Spain",
+        "awayTeam": "Japan",
+        "homeWinProbability": 0.5011428601656981,
+        "awayWinProbability": 0.4988571398343019,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Spain"
+      },
+      {
+        "matchNo": 94,
+        "round": "round_of_16",
+        "homeTeam": "France",
+        "awayTeam": "Algeria",
+        "homeWinProbability": 0.6201770747241943,
+        "awayWinProbability": 0.37982292527580586,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "France"
+      },
+      {
+        "matchNo": 95,
+        "round": "round_of_16",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Argentina",
+        "homeWinProbability": 0.2933722038473589,
+        "awayWinProbability": 0.7066277961526408,
+        "homeScore": 1,
+        "awayScore": 2,
+        "winner": "Argentina"
+      },
+      {
+        "matchNo": 96,
+        "round": "round_of_16",
+        "homeTeam": "Jordan",
+        "awayTeam": "Panama",
+        "homeWinProbability": 0.4009991591011227,
+        "awayWinProbability": 0.5990008408988772,
+        "homeScore": 1,
+        "awayScore": 3,
+        "winner": "Panama"
+      }
+    ],
+    "quarter_final": [
+      {
+        "matchNo": 97,
+        "round": "quarter_final",
+        "homeTeam": "Czech Republic",
+        "awayTeam": "Brazil",
+        "homeWinProbability": 0.386823877887838,
+        "awayWinProbability": 0.6131761221121618,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Czech Republic"
+      },
+      {
+        "matchNo": 98,
+        "round": "quarter_final",
+        "homeTeam": "Ecuador",
+        "awayTeam": "Netherlands",
+        "homeWinProbability": 0.4632212784958256,
+        "awayWinProbability": 0.5367787215041744,
+        "homeScore": 1,
+        "awayScore": 3,
+        "winner": "Netherlands"
+      },
+      {
+        "matchNo": 99,
+        "round": "quarter_final",
+        "homeTeam": "Spain",
+        "awayTeam": "France",
+        "homeWinProbability": 0.4378783269058344,
+        "awayWinProbability": 0.5621216730941656,
+        "homeScore": 1,
+        "awayScore": 3,
+        "winner": "France"
+      },
+      {
+        "matchNo": 100,
+        "round": "quarter_final",
+        "homeTeam": "Argentina",
+        "awayTeam": "Panama",
+        "homeWinProbability": 0.7263788847387831,
+        "awayWinProbability": 0.2736211152612169,
+        "homeScore": 2,
+        "awayScore": 1,
+        "winner": "Argentina"
+      }
+    ],
+    "semi_final": [
+      {
+        "matchNo": 101,
+        "round": "semi_final",
+        "homeTeam": "Czech Republic",
+        "awayTeam": "Netherlands",
+        "homeWinProbability": 0.41977991906369044,
+        "awayWinProbability": 0.5802200809363095,
+        "homeScore": 1,
+        "awayScore": 2,
+        "winner": "Netherlands"
+      },
+      {
+        "matchNo": 102,
+        "round": "semi_final",
+        "homeTeam": "France",
+        "awayTeam": "Argentina",
+        "homeWinProbability": 0.3758549607366245,
+        "awayWinProbability": 0.6241450392633754,
+        "homeScore": 1,
+        "awayScore": 2,
+        "winner": "Argentina"
+      }
+    ],
+    "final": [
+      {
+        "matchNo": 103,
+        "round": "final",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Argentina",
+        "homeWinProbability": 0.40891618200179647,
+        "awayWinProbability": 0.5910838179982036,
+        "homeScore": 4,
+        "awayScore": 2,
+        "winner": "Netherlands"
+      }
+    ]
+  },
+  "predictedChampion": "Netherlands"
+}
