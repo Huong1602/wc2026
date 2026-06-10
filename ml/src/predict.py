@@ -31,6 +31,7 @@ def predict_match(
 
     classifier_artifact = joblib.load(CLASSIFIER_FILE)
     model = classifier_artifact["model"]
+    models = classifier_artifact.get("models", {classifier_artifact["model_name"]: model})
     label_encoder = classifier_artifact["label_encoder"]
     feature_columns = classifier_artifact["feature_columns"]
 
@@ -46,11 +47,22 @@ def predict_match(
     )
     feature_frame = pd.DataFrame([{column: features[column] for column in feature_columns}])
 
-    probabilities = model.predict_proba(feature_frame)[0]
-    labels = label_encoder.inverse_transform(range(len(probabilities)))
-    probability_map = {"homeWin": 0.0, "draw": 0.0, "awayWin": 0.0}
-    for label, probability in zip(labels, probabilities):
-        probability_map[LABEL_TO_OUTPUT_KEY[label]] = float(probability)
+    labels = label_encoder.inverse_transform(range(len(label_encoder.classes_)))
+    model_predictions = {}
+
+    for model_name, candidate_model in models.items():
+        candidate_probabilities = candidate_model.predict_proba(feature_frame)[0]
+        candidate_probability_map = {"homeWin": 0.0, "draw": 0.0, "awayWin": 0.0}
+        for label, probability in zip(labels, candidate_probabilities):
+            candidate_probability_map[LABEL_TO_OUTPUT_KEY[label]] = float(probability)
+
+        predicted_label = labels[int(candidate_probabilities.argmax())]
+        model_predictions[model_name] = {
+            "probabilities": candidate_probability_map,
+            "predictedResult": LABEL_TO_OUTPUT_KEY[predicted_label],
+        }
+
+    probability_map = model_predictions[classifier_artifact["model_name"]]["probabilities"]
 
     score_prediction = {"home": 0, "away": 0}
     if REGRESSOR_FILE.exists():
@@ -76,6 +88,7 @@ def predict_match(
         "probabilities": probability_map,
         "predictedScore": score_prediction,
         "modelName": classifier_artifact["model_name"],
+        "modelPredictions": model_predictions,
         "topFeatures": top_features,
         "featureValues": {column: float(feature_frame.iloc[0][column]) for column in feature_columns},
     }

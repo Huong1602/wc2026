@@ -176,9 +176,11 @@ def train() -> None:
     best_model_name = None
     best_model = None
     best_score = -1.0
+    trained_models = {}
 
     for model_name, model in get_candidate_models(len(labels)).items():
         model.fit(x_train, y_train)
+        trained_models[model_name] = model
         predictions = model.predict(x_test)
         probabilities = model.predict_proba(x_test) if hasattr(model, "predict_proba") else None
         accuracy = accuracy_score(y_test, predictions)
@@ -228,6 +230,7 @@ def train() -> None:
     joblib.dump(
         {
             "model": best_model,
+            "models": trained_models,
             "model_name": best_model_name,
             "label_encoder": label_encoder,
             "feature_columns": FEATURE_COLUMNS,
