@@ -1,7 +1,7 @@
 {
-  "simulationCount": 100,
+  "simulationCount": 10000,
   "representativeRun": 1,
-  "generatedAt": "2026-06-10T15:53:49.327993+00:00",
+  "generatedAt": "2026-06-12T08:01:28.437957+00:00",
   "standings": {
     "A": [
       {
